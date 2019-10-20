@@ -20,7 +20,7 @@ public class Main {
         JDA discord;
         ReadyListener readyListener;
         try {
-            discord = new JDABuilder("NjM0OTg2MzQ5MTcwMTMwOTY0.XaqrCA.lD71Ad-1ytVhg4Kyr-9TMRlCRXQ")
+            discord = new JDABuilder(getToken())
                     .setActivity(Activity.playing("Dungeons & Dragons"))
                     .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY))
                     .setStatus(OnlineStatus.ONLINE)
@@ -40,7 +40,7 @@ public class Main {
     }
 
     public static String getToken() {
-        File file = new File("token");
+        File file = new File("token.txt");
         System.out.println(file.getAbsolutePath());
         if (!file.exists()) {
             System.out.println("File doesn't exist at location: " + file.getAbsolutePath());

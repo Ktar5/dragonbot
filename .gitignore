@@ -2,3 +2,5 @@
 /.gradle/
 /build/
 /build/classes/java/main/
+log.txt
+token.txt
