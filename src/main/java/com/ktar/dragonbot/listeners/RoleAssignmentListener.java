@@ -9,6 +9,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
 
+/**
+ * This listener looks for if we have a guild member receive the WEEKLY_DM_ROLE role, and if they do
+ * remove it and create a weekly DM group for that user
+ */
 public class RoleAssignmentListener extends ListenerAdapter {
 
     @Override

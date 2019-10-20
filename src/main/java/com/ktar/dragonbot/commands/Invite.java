@@ -4,6 +4,9 @@ import com.ktar.dragonbot.commands.back.RegisterCommand;
 import com.ktar.dragonbot.commands.back.RoleCommand;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+/**
+ * Simply post the invite link to the Discord chat
+ */
 @RegisterCommand
 public class Invite extends RoleCommand {
     public Invite() {

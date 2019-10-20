@@ -7,6 +7,9 @@ import org.tinylog.Logger;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Just for logging purposes. It prints out once the first ReadyEvent is received
+ */
 public class ReadyListener implements EventListener {
 
     public ReadyListener(){

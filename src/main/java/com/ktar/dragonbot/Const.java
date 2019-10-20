@@ -1,5 +1,10 @@
 package com.ktar.dragonbot;
 
+/**
+ * This file contains constants that are used in identifying certain channels, roles, and groups within the
+ * Discord channel that we operate out of. To get these access IDs, simple enable developer options in your
+ * Discord settings and then you'll be able to "right click -> Copy ID" on most Discord entities.
+ */
 public final class Const {
     public static final String WEEKLY_DM_ROLE = "635576815435382794";
     public static final String DM_ROLE = "613164964219453443";

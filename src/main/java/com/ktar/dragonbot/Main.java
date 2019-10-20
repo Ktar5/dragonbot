@@ -14,6 +14,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.EnumSet;
 
+/**
+ * Main entrypoint for the starting of the program. This creates the Discord bot and loads the token from the
+ * token.txt file (which is not included for obvious reasons).
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -39,7 +43,7 @@ public class Main {
         new Bot(discord, readyListener);
     }
 
-    public static String getToken() {
+    private static String getToken() {
         File file = new File("token.txt");
         System.out.println(file.getAbsolutePath());
         if (!file.exists()) {

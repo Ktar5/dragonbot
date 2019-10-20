@@ -10,13 +10,22 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
+/**
+ * Handles the processing of data that leads to the execution of certain commands
+ */
 public class CommandHandler {
+    /**HashMap<Command Usage String, Command Instance>*/
     private final HashMap<String, Command> commands;
 
     public CommandHandler() {
         commands = new HashMap<>();
     }
 
+    /**
+     * Registers a Command to the commands HashMap for use in identifying which command a particular
+     * String refers to.
+     * @param command the Command to register
+     */
     public void registerCommand(Command command) {
         if (commands.containsKey(command.command.toLowerCase())) {
             Logger.error("Command already exists for string: " + command.command.toLowerCase());
@@ -26,6 +35,12 @@ public class CommandHandler {
         Logger.info("Added command: " + command.command.toLowerCase());
     }
 
+    /**
+     * Receives a MessageReceivedEvent directly from CommandListener and parses it to check
+     * what command (if any) it represents, and sends the data to the relevant command
+     * to attempt a use.
+     * @param event the MessageReceivedEvent directly from CommandListner
+     */
     public void handleCommand(MessageReceivedEvent event) {
         String contentDisplay = event.getMessage().getContentDisplay();
         contentDisplay = contentDisplay.substring(6);
@@ -42,6 +57,10 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Use reflection to scan the com.ktar.dragonbot.commands package and search for any command class that
+     * is annotated with @RegisterCommand
+     */
     public void autoRegisterCommands() {
         String pkg = "com.ktar.dragonbot.commands";
         String annotation = pkg + ".back.RegisterCommand";
@@ -54,7 +73,7 @@ public class CommandHandler {
                 Class<?> aClass = Class.forName(routeClassInfo.getName());
                 for (Constructor constructor : aClass.getConstructors()) {
                     if (constructor.getParameters().length == 0) {
-                        constructor.newInstance();
+                        registerCommand(((Command) constructor.newInstance()));
                     }
                 }
             }

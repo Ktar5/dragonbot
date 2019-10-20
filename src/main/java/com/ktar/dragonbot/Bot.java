@@ -13,6 +13,11 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.tinylog.Logger;
 
+/**
+ * This serves as the headquarters for the logic of the Bot. Basically everything except creating the bot itself is
+ * done from this class or from a field in this class.
+ */
+
 @Getter
 public class Bot {
     private static Bot instance;
