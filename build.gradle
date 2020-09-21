@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.github.ben-manes.versions" version "0.33.0"
 }
 
 group 'com.ktar'
@@ -13,12 +14,13 @@ repositories {
 }
 
 dependencies {
-    compile ('net.dv8tion:JDA:4.0.0_52'){
+    compile('net.dv8tion:JDA:4.2.0_204') {
         exclude module: 'opus-java'
     }
-    compile 'org.tinylog:tinylog-impl:2.0.0'
-    compile 'org.tinylog:slf4j-tinylog:2.0.0'
+    compile 'org.tinylog:tinylog-impl:2.1.2'
+    compile 'org.tinylog:slf4j-tinylog:2.1.2'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
     compile group: 'io.github.classgraph', name: 'classgraph', version: '4.8.52'
-    compileOnly 'org.projectlombok:lombok:1.18.10'
-    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }

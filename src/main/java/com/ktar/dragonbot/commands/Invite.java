@@ -1,7 +1,7 @@
 package com.ktar.dragonbot.commands;
 
-import com.ktar.dragonbot.commands.back.RegisterCommand;
-import com.ktar.dragonbot.commands.back.RoleCommand;
+import com.ktar.dragonbot.commands.system.RegisterCommand;
+import com.ktar.dragonbot.commands.system.RoleCommand;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 /**

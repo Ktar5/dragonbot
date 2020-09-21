@@ -1,10 +1,10 @@
 package com.ktar.dragonbot;
 
-import com.ktar.dragonbot.commands.Invite;
-import com.ktar.dragonbot.commands.SendMemberAnnouncement;
-import com.ktar.dragonbot.commands.back.CommandHandler;
-import com.ktar.dragonbot.commands.back.CommandListener;
+import com.ktar.dragonbot.commands.system.CommandHandler;
+import com.ktar.dragonbot.commands.system.CommandListener;
 import com.ktar.dragonbot.dnd.GroupHandler;
+import com.ktar.dragonbot.listeners.MessageDeleteListener;
+import com.ktar.dragonbot.listeners.ReactionListener;
 import com.ktar.dragonbot.listeners.ReadyListener;
 import com.ktar.dragonbot.listeners.RoleAssignmentListener;
 import lombok.Getter;
@@ -36,7 +36,10 @@ public class Bot {
 
         this.commandListener = new CommandListener();
         discord.addEventListener(commandListener);
+        discord.addEventListener(new ReactionListener());
         discord.addEventListener(new RoleAssignmentListener());
+        discord.addEventListener(new MessageDeleteListener());
+
 
         this.commandHandler = new CommandHandler();
         this.groupHandler = new GroupHandler();

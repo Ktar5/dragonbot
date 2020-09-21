@@ -1,4 +1,4 @@
-package com.ktar.dragonbot.commands.back;
+package com.ktar.dragonbot.commands.system;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 

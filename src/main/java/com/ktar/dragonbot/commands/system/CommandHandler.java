@@ -1,4 +1,4 @@
-package com.ktar.dragonbot.commands.back;
+package com.ktar.dragonbot.commands.system;
 
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
@@ -63,7 +63,7 @@ public class CommandHandler {
      */
     public void autoRegisterCommands() {
         String pkg = "com.ktar.dragonbot.commands";
-        String annotation = pkg + ".back.RegisterCommand";
+        String annotation = pkg + ".system.RegisterCommand";
         try (ScanResult scanResult = new ClassGraph()
                 .enableAnnotationInfo()
                 .enableClassInfo()

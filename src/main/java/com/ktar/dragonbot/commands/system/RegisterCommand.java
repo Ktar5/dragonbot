@@ -1,4 +1,4 @@
-package com.ktar.dragonbot.commands.back;
+package com.ktar.dragonbot.commands.system;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

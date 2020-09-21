@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
@@ -24,9 +25,9 @@ public class Main {
         JDA discord;
         ReadyListener readyListener;
         try {
-            discord = new JDABuilder(getToken())
+            discord = JDABuilder.create(getToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.DIRECT_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
                     .setActivity(Activity.playing("Dungeons & Dragons"))
-                    .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY))
+                    .disableCache(EnumSet.of(CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY))
                     .setStatus(OnlineStatus.ONLINE)
                     .addEventListeners(readyListener = new ReadyListener())
                     .build();
