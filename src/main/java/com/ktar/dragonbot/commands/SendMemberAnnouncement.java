@@ -21,8 +21,9 @@ public class SendMemberAnnouncement extends RoleCommand {
 
     private static String announcement =
         "@everyone ***Weekly Survey***\n" +
-            "> Every week we put out this survey for figuring out how many DMs we need in comparison with how many players we will have. Please read the instructions below.\n" +
-            "If you would like to register as a DM please react with :star: or if you would like to be a player please react with <:yes:682879741270687796> Any reactions other than :star: or <:yes:682879741270687796> will be removed automatically.\n" +
+            "**If you want to play this week, you have to react.**\n" +
+            "> Every week we put out this survey for figuring out how many DMs we need in comparison with how many players we will have, for specifically the next week. Please read the instructions below.\n" +
+            "If you would like to register as a DM (for this upcoming week) please react with :star: or if you would like to be a player please react with <:yes:682879741270687796> Any reactions other than :star: or <:yes:682879741270687796> will be removed automatically.\n" +
             "Be nice, DM once or twice. If you see significantly more players than ~5/DM, consider DMing!\n" +
             "We need approximately 3-4 DMs each week, so don't be shy!\n";
 
