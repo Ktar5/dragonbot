@@ -14,7 +14,7 @@ import org.tinylog.Logger;
 
 import java.util.List;
 
-public class DmAssignmentListener extends ListenerAdapter {
+public class WeeklyDmAssignmentListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
         if (!SendMemberAnnouncement.messagesForWeeklyAnnouncements.contains(event.getMessageIdLong())) {

@@ -3,7 +3,8 @@ package com.ktar.dragonbot;
 import com.ktar.dragonbot.commands.system.CommandHandler;
 import com.ktar.dragonbot.commands.system.CommandListener;
 import com.ktar.dragonbot.dnd.GroupHandler;
-import com.ktar.dragonbot.listeners.DmAssignmentListener;
+import com.ktar.dragonbot.listeners.MaybeDMRoleAssignment;
+import com.ktar.dragonbot.listeners.WeeklyDmAssignmentListener;
 import com.ktar.dragonbot.listeners.ReadyListener;
 import com.ktar.dragonbot.listeners.RoleAssignmentListener;
 import lombok.Getter;
@@ -35,8 +36,9 @@ public class Bot {
 
         this.commandListener = new CommandListener();
         discord.addEventListener(commandListener);
-        discord.addEventListener(new DmAssignmentListener());
+        discord.addEventListener(new WeeklyDmAssignmentListener());
         discord.addEventListener(new RoleAssignmentListener());
+        discord.addEventListener(new MaybeDMRoleAssignment());
 
         this.commandHandler = new CommandHandler();
         this.groupHandler = new GroupHandler();
