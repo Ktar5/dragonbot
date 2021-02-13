@@ -64,6 +64,7 @@ public class SendMemberAnnouncement extends RoleCommand {
             new TimerTask() {
                 @Override
                 public void run() {
+                    ClearDM.clearDMRoles();
                     sendAnnouncement();
                 }
             },
