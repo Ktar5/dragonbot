@@ -15,10 +15,12 @@ import net.dv8tion.jda.api.requests.ErrorResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -56,12 +58,8 @@ public class SendMemberAnnouncement extends RoleCommand {
 
 
         Timer timer = new Timer();
-        Calendar date = Calendar.getInstance();
-        date.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-        date.set(Calendar.HOUR, 10);
-        date.set(Calendar.MINUTE, 0);
-        date.set(Calendar.SECOND, 0);
-        date.set(Calendar.MILLISECOND, 0);
+        LocalDateTime nextTime = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        Date nextTimeDate = Date.from(nextTime.atZone(ZoneId.systemDefault()).toInstant());
         timer.schedule(
             new TimerTask() {
                 @Override
@@ -69,7 +67,7 @@ public class SendMemberAnnouncement extends RoleCommand {
                     sendAnnouncement();
                 }
             },
-            date.getTime(),
+            nextTimeDate.getTime(),
             1000 * 60 * 60 * 24 * 7
         );
 

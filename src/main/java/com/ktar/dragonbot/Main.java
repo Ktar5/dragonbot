@@ -40,11 +40,11 @@ public class Main {
         ReadyListener readyListener;
         try {
             discord = JDABuilder.create(getToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.DIRECT_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
-                    .setActivity(Activity.playing("Dungeons & Dragons"))
-                    .disableCache(EnumSet.of(CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY))
-                    .setStatus(OnlineStatus.ONLINE)
-                    .addEventListeners(readyListener = new ReadyListener())
-                    .build();
+                .setActivity(Activity.playing("Dungeons & Dragons"))
+                .disableCache(EnumSet.of(CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY))
+                .setStatus(OnlineStatus.ONLINE)
+                .addEventListeners(readyListener = new ReadyListener())
+                .build();
         } catch (LoginException e) {
             e.printStackTrace();
             return;
