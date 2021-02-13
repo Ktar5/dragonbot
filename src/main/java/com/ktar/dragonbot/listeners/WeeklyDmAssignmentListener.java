@@ -17,7 +17,7 @@ import java.util.List;
 public class WeeklyDmAssignmentListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
-        if (!SendMemberAnnouncement.messagesForWeeklyAnnouncements.contains(event.getMessageIdLong())) {
+        if (SendMemberAnnouncement.weeklyAnnouncementMessage != event.getMessageIdLong()) {
             return;
         }
 
@@ -44,16 +44,16 @@ public class WeeklyDmAssignmentListener extends ListenerAdapter {
         } else if (event.getReactionEmote().isEmote()) {
             if (!event.getReactionEmote().getEmote().getId().equals("682879741270687796")) {
                 event.getReaction().removeReaction().queue();
+                event.getMember().getUser().openPrivateChannel().queue(t -> {
+                    t.sendMessage("Please only react with the `:yes:` emoji or the `:star:` emoji. Thank you.").queue();
+                });
             }
-            event.getMember().getUser().openPrivateChannel().queue(t -> {
-                t.sendMessage("Please only react with the `:yes:` emoji or the `:star:` emoji. Thank you.").queue();
-            });
         }
     }
 
     @Override
     public void onGuildMessageReactionRemove(@NotNull GuildMessageReactionRemoveEvent event) {
-        if (!SendMemberAnnouncement.messagesForWeeklyAnnouncements.contains(event.getMessageIdLong())) {
+        if (SendMemberAnnouncement.weeklyAnnouncementMessage != event.getMessageIdLong()) {
             return;
         }
 
@@ -89,8 +89,7 @@ public class WeeklyDmAssignmentListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
-        boolean remove = SendMemberAnnouncement.messagesForWeeklyAnnouncements.remove(event.getMessageIdLong());
-        if (remove) {
+        if (SendMemberAnnouncement.weeklyAnnouncementMessage == event.getMessageIdLong()) {
             Role role = event.getGuild().getRoleById(Const.DM_ROLE);
             List<Member> membersWithRoles = event.getGuild().getMembersWithRoles(role);
             for (Member member : membersWithRoles) {

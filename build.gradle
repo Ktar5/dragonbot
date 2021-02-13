@@ -14,9 +14,12 @@ repositories {
 }
 
 dependencies {
-    compile('net.dv8tion:JDA:4.2.0_204') {
+    compile('net.dv8tion:JDA:4.2.0_228') {
         exclude module: 'opus-java'
     }
+
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
+
     compile 'org.tinylog:tinylog-impl:2.1.2'
     compile 'org.tinylog:slf4j-tinylog:2.1.2'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'

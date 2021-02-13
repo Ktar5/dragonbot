@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.EnumSet;
 
 /**
@@ -20,8 +21,21 @@ import java.util.EnumSet;
  * token.txt file (which is not included for obvious reasons).
  */
 public class Main {
+    public static Database database;
+    public static boolean enabled;
 
     public static void main(String[] args) {
+        database = new Database();
+        try {
+            database.openConnection().createStatement().execute("CREATE TABLE IF NOT EXISTS data_store (" +
+                "  id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "  key VARCHAR(48) NOT NULL UNIQUE," +
+                "  value INTEGER" +
+                ")");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         JDA discord;
         ReadyListener readyListener;
         try {

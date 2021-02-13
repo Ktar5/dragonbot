@@ -20,7 +20,7 @@ public class MaybeDMRoleAssignment extends ListenerAdapter {
         if (roleMessageId == -1) {
             event.getReaction().getTextChannel().retrieveMessageById(event.getMessageId()).queue(message -> {
                 Member poster = event.getGuild().getMember(message.getAuthor());
-                if (poster != null && poster.getRoles().contains(event.getGuild().getRoleById(Const.ADMIN_ROLE))) {
+                if (poster != null && poster.getRoles().contains(event.getGuild().getRoleById(Const.OFFICER_ROLE))) {
                     if (message.getContentDisplay().contains(".dbot roleassign")) {
                         roleMessageId = message.getIdLong();
                         onGuildMessageReactionAdd(event);

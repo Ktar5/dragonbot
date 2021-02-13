@@ -12,7 +12,12 @@ import java.util.List;
 @RegisterCommand
 public class ClearDM extends RoleCommand {
     public ClearDM() {
-        super("cleardm", RoleName.ADMIN);
+        super("cleardm", RoleName.FOUNDER, RoleName.OFFICER, RoleName.ADMIN);
+    }
+
+    @Override
+    public String getHelp() {
+        return "Clears the DM role and sends thank you messages";
     }
 
     @Override
@@ -23,9 +28,10 @@ public class ClearDM extends RoleCommand {
             event.getGuild().removeRoleFromMember(member, role).queue();
             member.getUser().openPrivateChannel().queue(privateChannel -> {
                 privateChannel.sendMessage("Thanks for participating in club as a DM this past week, it's super appreciated!\n" +
-                        "If you're up for doing it again next week, hit up Ktar / Carter in Discord!\n\n" +
-                        "Once again, thanks!").queue();
+                    "If you're up for doing it again next week, hit us up in Discord!\n\n" +
+                    "Once again, thanks!").queue();
             });
         }
+        event.getMessage().reply("Cleared DM Role successfully").queue();
     }
 }

@@ -3,6 +3,7 @@ package com.ktar.dragonbot.commands.system;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
+import lombok.Getter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.tinylog.Logger;
 
@@ -14,7 +15,10 @@ import java.util.HashMap;
  * Handles the processing of data that leads to the execution of certain commands
  */
 public class CommandHandler {
-    /**HashMap<Command Usage String, Command Instance>*/
+    /**
+     * HashMap<Command Usage String, Command Instance>
+     */
+    @Getter
     private final HashMap<String, Command> commands;
 
     public CommandHandler() {
@@ -24,6 +28,7 @@ public class CommandHandler {
     /**
      * Registers a Command to the commands HashMap for use in identifying which command a particular
      * String refers to.
+     *
      * @param command the Command to register
      */
     public void registerCommand(Command command) {
@@ -39,6 +44,7 @@ public class CommandHandler {
      * Receives a MessageReceivedEvent directly from CommandListener and parses it to check
      * what command (if any) it represents, and sends the data to the relevant command
      * to attempt a use.
+     *
      * @param event the MessageReceivedEvent directly from CommandListner
      */
     public void handleCommand(MessageReceivedEvent event) {
@@ -65,10 +71,10 @@ public class CommandHandler {
         String pkg = "com.ktar.dragonbot.commands";
         String annotation = pkg + ".system.RegisterCommand";
         try (ScanResult scanResult = new ClassGraph()
-                .enableAnnotationInfo()
-                .enableClassInfo()
-                .whitelistPackages(pkg)
-                .scan()) {
+            .enableAnnotationInfo()
+            .enableClassInfo()
+            .whitelistPackages(pkg)
+            .scan()) {
             for (ClassInfo routeClassInfo : scanResult.getClassesWithAnnotation(annotation)) {
                 Class<?> aClass = Class.forName(routeClassInfo.getName());
                 for (Constructor constructor : aClass.getConstructors()) {

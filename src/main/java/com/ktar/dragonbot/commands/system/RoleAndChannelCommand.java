@@ -8,10 +8,14 @@ import java.util.List;
  * A combination of RoleCommand and ChannelCommand such that you need to have a specific role and
  * send the command from a specific Channel
  */
-public abstract class RoleAndChannelCommand extends Command{
-    /**An array of Strings representing the channel NAMES allowed*/
+public abstract class RoleAndChannelCommand extends Command {
+    /**
+     * An array of Strings representing the channel NAMES allowed
+     */
     public final String[] channels;
-    /**An array of Strings representing the role NAMES allowed*/
+    /**
+     * An array of Strings representing the role NAMES allowed
+     */
     public final RoleName[] roleNames;
 
     public RoleAndChannelCommand(String command, String[] channels, RoleName[] roleNames) {
@@ -32,17 +36,18 @@ public abstract class RoleAndChannelCommand extends Command{
     /**
      * Checks if the user who sent the message in the MessageReceivedEvent (event) has
      * the proper role to use this command
+     *
      * @param event the MessageReceivedEvent that caused this command to be triggered
      * @return true if the user in the MessageReceivedEvent (event) has one of the roles from {@link RoleAndChannelCommand#roleNames}
      */
-    private boolean roleCheck(MessageReceivedEvent event){
-        if(roleNames[0].equals(RoleName.EVERYONE)){
+    private boolean roleCheck(MessageReceivedEvent event) {
+        if (roleNames[0].equals(RoleName.EVERYONE)) {
             return true;
         }
         List<net.dv8tion.jda.api.entities.Role> serverRoles = event.getMember().getRoles();
         for (net.dv8tion.jda.api.entities.Role role : serverRoles) {
             for (RoleName accepted : roleNames) {
-                if(role.getName().equalsIgnoreCase(accepted.roleName)){
+                if (role.getName().equalsIgnoreCase(accepted.roleName)) {
                     return true;
                 }
             }
@@ -53,13 +58,14 @@ public abstract class RoleAndChannelCommand extends Command{
     /**
      * Checks if the user who sent the message in the MessageReceivedEvent (event) sent the message from
      * a channel allowed by {@link RoleAndChannelCommand#channels}
+     *
      * @param event the MessageReceivedEvent that caused this command to be triggered
      * @return true if the MessageReceivedEvent (event) came from a channel included in {@link RoleAndChannelCommand#channels}
      */
-    private boolean channelCheck(MessageReceivedEvent event){
+    private boolean channelCheck(MessageReceivedEvent event) {
         String channelName = event.getChannel().getName();
         for (String allowedChannelName : channels) {
-            if(channelName.equalsIgnoreCase(allowedChannelName)){
+            if (channelName.equalsIgnoreCase(allowedChannelName)) {
                 return true;
             }
         }

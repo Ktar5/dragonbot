@@ -14,7 +14,12 @@ public class Invite extends RoleCommand {
     }
 
     @Override
+    public String getHelp() {
+        return "Displays the invite link";
+    }
+
+    @Override
     public void act(MessageReceivedEvent event, String content) {
-        event.getChannel().sendMessage("Invite link to discord: https://discordapp.com/invite/tWeUm69").queue();
+        event.getMessage().reply("Invite link to discord: https://discordapp.com/invite/tWeUm69").queue();
     }
 }
