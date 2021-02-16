@@ -102,7 +102,8 @@ public class SendMemberAnnouncement extends RoleCommand {
         }
 
         //Get date for the replacement string
-        final ZonedDateTime nextClubMeeting = ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusWeeks(1).with(DayOfWeek.THURSDAY);
+        final ZonedDateTime nextClubMeeting = ZonedDateTime.now(ZoneId.of("America/Los_Angeles"))
+            .with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
         String weeklyAnnouncement = announcement.replace("{{DATE}}", nextClubMeeting.format(DateTimeFormatter.ofPattern("E, LLL dd")));
 
         //Delete old message
