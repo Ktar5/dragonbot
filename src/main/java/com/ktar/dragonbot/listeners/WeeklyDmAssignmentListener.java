@@ -81,7 +81,7 @@ public class WeeklyDmAssignmentListener extends ListenerAdapter {
             event.getGuild().removeRoleFromMember(member, role).queue();
             member.getUser().openPrivateChannel().queue(privateChannel -> {
                 privateChannel.sendMessage("Thanks for participating in club as a DM this past week, it's super appreciated!\n" +
-                    "If you're up for doing it again next week, hit up Ktar / Carter in the Discord!\n\n" +
+                    "If you're up for doing it again next week, hit us up in the Discord!\n\n" +
                     "Once again, thanks!").queue();
             });
         }
@@ -96,7 +96,7 @@ public class WeeklyDmAssignmentListener extends ListenerAdapter {
                 event.getGuild().removeRoleFromMember(member, role).queue();
                 member.getUser().openPrivateChannel().queue(privateChannel -> {
                     privateChannel.sendMessage("Thanks for participating in club as a DM this past week, it's super appreciated!\n" +
-                        "If you're up for doing it again next week, hit up Ktar / Carter in the Discord!\n\n" +
+                        "If you're up for doing it again next week, hit us up in the Discord!\n\n" +
                         "Once again, thanks!").queue();
                 });
             }
