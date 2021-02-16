@@ -121,6 +121,7 @@ public class SendMemberAnnouncement extends RoleCommand {
 
     @Override
     public void act(MessageReceivedEvent event, String content) {
+        sendAnnouncement();
         event.getMessage().delete().queue();
     }
 }
