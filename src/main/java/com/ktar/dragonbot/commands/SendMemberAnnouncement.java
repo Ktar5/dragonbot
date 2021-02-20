@@ -15,10 +15,7 @@ import net.dv8tion.jda.api.requests.ErrorResponse;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
@@ -59,7 +56,7 @@ public class SendMemberAnnouncement extends RoleCommand {
 
 
         Timer timer = new Timer();
-        LocalDateTime nextTime = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        LocalDateTime nextTime = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).with(LocalTime.of(10, 0));
         Date nextTimeDate = Date.from(nextTime.atZone(ZoneId.systemDefault()).toInstant());
         timer.schedule(
             new TimerTask() {
