@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.ErrorHandler;
 import net.dv8tion.jda.api.requests.ErrorResponse;
 
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
@@ -68,10 +69,9 @@ public class SendMemberAnnouncement extends RoleCommand {
                     sendAnnouncement();
                 }
             },
-            nextTimeDate.getTime(),
+            nextTimeDate.getTime() - System.currentTimeMillis(),
             1000 * 60 * 60 * 24 * 7
         );
-
     }
 
     private static final String YES_STRING = "<:yes:682879741270687796>";
