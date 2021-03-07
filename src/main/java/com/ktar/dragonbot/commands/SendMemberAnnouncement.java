@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.ErrorHandler;
 import net.dv8tion.jda.api.requests.ErrorResponse;
 
-import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.*;
@@ -56,18 +55,23 @@ public class SendMemberAnnouncement extends RoleCommand {
 
 
         Timer timer = new Timer();
+        schedule(timer);
+    }
+
+    public void schedule(Timer timer) {
         LocalDateTime nextTime = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).with(LocalTime.of(10, 0));
         Date nextTimeDate = Date.from(nextTime.atZone(ZoneId.systemDefault()).toInstant());
+
         timer.schedule(
             new TimerTask() {
                 @Override
                 public void run() {
                     ClearDM.clearDMRoles();
                     sendAnnouncement();
+                    schedule(timer);
                 }
             },
-            nextTimeDate.getTime() - System.currentTimeMillis(),
-            1000 * 60 * 60 * 24 * 7
+            nextTimeDate.getTime() - System.currentTimeMillis()
         );
     }
 
