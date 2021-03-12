@@ -17,14 +17,12 @@ public class RoleAssignmentListener extends ListenerAdapter {
 
     @Override
     public void onGuildMemberRoleAdd(@Nonnull GuildMemberRoleAddEvent event) {
-        for (Role role : event.getRoles()) {
-            if(role.getId().equalsIgnoreCase(Const.WEEKLY_DM_ROLE)){
-                Bot.get().getGroupHandler().setWeekDM(event.getMember().getId());
-                event.getMember().getGuild().removeRoleFromMember(event.getMember(), role).queue();
-                Bot.get().sendLogMessage("Weekly DM assigned to: " + event.getMember().getEffectiveName());
-                return;
-            }
-        }
+//        for (Role role : event.getRoles()) {
+//            if(role.getId().equalsIgnoreCase(Const.WEEKLY_DM_ROLE)){
+//                Bot.get().getGroupHandler().assignWeeklyDM(event.getMember().getId());
+//                return;
+//            }
+//        }
     }
 
     @Override

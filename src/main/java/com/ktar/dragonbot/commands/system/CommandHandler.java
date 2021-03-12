@@ -49,14 +49,14 @@ public class CommandHandler {
      */
     public void handleCommand(MessageReceivedEvent event) {
         String contentDisplay = event.getMessage().getContentDisplay();
-        contentDisplay = contentDisplay.substring(6);
-        String[] splits = contentDisplay.split(" ", 2);
-        String command = splits[0].toLowerCase();
+        contentDisplay = contentDisplay.substring(6); // remove the '.dbot ' from the command string
+        String[] splits = contentDisplay.split(" ", 2); // split into the first word (command) and rest
+        String command = splits[0].toLowerCase(); //lowercase the command name
 
         if (commands.get(command) != null) {
             Logger.info("Handling command: " + command);
             if (splits.length > 1) {
-                commands.get(command).attemptUse(event, splits[1]);
+                commands.get(command).attemptUse(event, splits[1]); //send the rest of the string as an argument
             } else {
                 commands.get(command).attemptUse(event, "");
             }

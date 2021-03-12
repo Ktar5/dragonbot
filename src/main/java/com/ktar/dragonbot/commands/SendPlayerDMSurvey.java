@@ -22,11 +22,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @RegisterCommand
-public class SendMemberAnnouncement extends RoleCommand {
+public class SendPlayerDMSurvey extends RoleCommand {
     public static long weeklyAnnouncementMessage = -1;
 
-    public SendMemberAnnouncement() {
-        super("membercount", RoleName.FOUNDER, RoleName.OFFICER, RoleName.ADMIN);
+    public SendPlayerDMSurvey() {
+        super("playercount", RoleName.FOUNDER, RoleName.OFFICER, RoleName.ADMIN);
 
         //Grab the latest weekly message id from the SQL database
         try {
@@ -66,7 +66,7 @@ public class SendMemberAnnouncement extends RoleCommand {
             new TimerTask() {
                 @Override
                 public void run() {
-                    ClearDM.clearDMRoles();
+                    Bot.get().getGroupHandler().clearDMs();
                     sendAnnouncement();
                     schedule(timer);
                 }
@@ -81,14 +81,17 @@ public class SendMemberAnnouncement extends RoleCommand {
         "@everyone ***Weekly Survey for {{DATE}}***\n" +
             "**If you want to play this week, you have to react.**\n" +
             "(*Even if you are continuing a session from last week*)\n\n" +
-            "> Every week we put out this survey for figuring out how many DMs we need in comparison with how many players we will have, for specifically the next week. Please read the instructions below.\n" +
-            "If you would like to register as a DM (for this upcoming week) please react with :star: or if you would like to be a player please react with <:yes:682879741270687796> Any reactions other than :star: or <:yes:682879741270687796> will be removed automatically.\n" +
+            "> Every week we put out this survey for figuring out how many DMs we need in comparison with how many " +
+            "players we will have, for specifically the next week. Please read the instructions below.\n" +
+            "If you would like to register as a DM (for this upcoming week) please react with :star: or if you " +
+            "would like to be a player please react with <:yes:682879741270687796> Any reactions other than :star: " +
+            "or <:yes:682879741270687796> will be removed automatically.\n" +
             "Be nice, DM once or twice. If you see significantly more players than ~5/DM, consider DMing!\n" +
             "We need approximately 2-4 DMs each week, so don't be shy!\n";
 
     @Override
     public String getHelp() {
-        return "Display the weekly register message";
+        return "Display the weekly register message for players and DMs";
     }
 
     private void sendAnnouncement() {
@@ -109,6 +112,8 @@ public class SendMemberAnnouncement extends RoleCommand {
 
         //Delete old message
         textChannelById.deleteMessageById(weeklyAnnouncementMessage).queue();
+        //Delete old message
+        textChannelById.deleteMessageById(SendGroupSurvey.groupSurveyMessage).queue();
 
         //Send new one and update
         Message complete = textChannelById.sendMessage(weeklyAnnouncement).complete();
@@ -124,6 +129,5 @@ public class SendMemberAnnouncement extends RoleCommand {
     @Override
     public void act(MessageReceivedEvent event, String content) {
         sendAnnouncement();
-        event.getMessage().delete().queue();
     }
 }
