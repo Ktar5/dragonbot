@@ -50,7 +50,7 @@ public class Party {
             throw new NullPointerException();
         }
 
-        Member member = guild.getMemberById(dm_id);
+        Member member = guild.retrieveMemberById(dm_id).complete();
         if (member == null) {
             Bot.get().sendLogMessage("Yikes, for some reason we can't find a member with the ID: " + dm_id);
             return false;

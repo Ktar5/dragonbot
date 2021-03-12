@@ -3,7 +3,10 @@ package com.ktar.dragonbot.dnd;
 import com.ktar.dragonbot.Bot;
 import com.ktar.dragonbot.Const;
 import lombok.Getter;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,26 +71,24 @@ public class GroupHandler {
             throw new NullPointerException();
         }
 
-        Member member = guild.getMemberById(userId);
-        if (member == null) {
-            throw new NullPointerException();
-        }
+        guild.retrieveMemberById(userId).queue(ret -> {
+            groups.put(userId, new Party(userId));
+            groupNumberToDmMap.add(userId);
 
-        groups.put(userId, new Party(userId));
-        groupNumberToDmMap.add(userId);
+            guild.addRoleToMember(ret.getUser().getId(), guild.getRoleById(Const.DM_ROLE)).queue();
+            TextChannel dm_channel = guild.getTextChannelById(Const.DM_CHANNEL);
+            if (dm_channel == null) {
+                Bot.get().sendLogMessage("The DM Channel was null");
+                return;
+            }
+            dm_channel.sendMessage("Thanks for DMing this week, " + ret.getUser().getAsMention() + "! " +
+                "Please register your adventure ***before Monday*** using the following DragonBot command in this channel:\n" +
+                "`.dbot register <character level> <adventure description>`\n" +
+                "Example Command: `.dbot register 7 The party finds themselves on an adventure`").queue();
 
-        guild.addRoleToMember(member, guild.getRoleById(Const.DM_ROLE)).queue();
-        TextChannel dm_channel = guild.getTextChannelById(Const.DM_CHANNEL);
-        if(dm_channel == null){
-            Bot.get().sendLogMessage("The DM Channel was null");
-            return;
-        }
-        dm_channel.sendMessage("Thanks for DMing this week, " + member.getAsMention() + "! " +
-            "Please register your adventure ***before Monday*** using the following DragonBot command in this channel:\n" +
-            "`.dbot register <character level> <adventure description>`\n" +
-            "Example Command: `.dbot register 7 The party finds themselves on an adventure`").queue();
+            Bot.get().sendLogMessage("Created group with user: '" + ret.getUser().getName() + "' as the DM.");
+        });
 
-        Bot.get().sendLogMessage("Created group with user: '" + member.getEffectiveName() + "' as the DM.");
     }
 
 }
