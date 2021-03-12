@@ -78,7 +78,7 @@ public class SendPlayerDMSurvey extends RoleCommand {
     private static final String YES_STRING = "<:yes:682879741270687796>";
 
     private static String announcement =
-        "@everyone ***Weekly Survey for {{DATE}}***\n" +
+        "@everzyone ***Weekly Survey for {{DATE}}***\n" +
             "**If you want to play this week, you have to react.**\n" +
             "(*Even if you are continuing a session from last week*)\n\n" +
             "> Every week we put out this survey for figuring out how many DMs we need in comparison with how many " +
