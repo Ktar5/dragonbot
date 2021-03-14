@@ -41,6 +41,11 @@ public class Party {
         }
     }
 
+    public void editLevelAndDescription(int level, String adventureDescription) {
+        this.level = level;
+        this.adventureDescription = adventureDescription;
+    }
+
     public boolean completeGroupRegistration(int level, String adventureDescription) {
         this.level = level;
         this.adventureDescription = adventureDescription;

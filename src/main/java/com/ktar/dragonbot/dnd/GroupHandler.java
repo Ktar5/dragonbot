@@ -83,7 +83,8 @@ public class GroupHandler {
             }
             dm_channel.sendMessage("Thanks for DMing this week, " + ret.getUser().getAsMention() + "! " +
                 "Please register your adventure ***before Monday*** using the following DragonBot command in this channel:\n" +
-                "`.dbot register <character level> <adventure description>`\n" +
+                "`.dbot register <character level> <adventure description>`. If you would like to edit your level and description," +
+                " simply run the command again before the next survey goes out on Monday.\n" +
                 "Example Command: `.dbot register 7 The party finds themselves on an adventure`").queue();
 
             Bot.get().sendLogMessage("Created group with user: '" + ret.getUser().getName() + "' as the DM.");

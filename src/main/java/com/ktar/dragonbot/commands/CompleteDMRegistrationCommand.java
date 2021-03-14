@@ -7,7 +7,6 @@ import com.ktar.dragonbot.commands.system.RoleAndChannelCommand;
 import com.ktar.dragonbot.dnd.Party;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.tinylog.Logger;
 
 @RegisterCommand
 public class CompleteDMRegistrationCommand extends RoleAndChannelCommand {
@@ -56,10 +55,16 @@ public class CompleteDMRegistrationCommand extends RoleAndChannelCommand {
             return;
         }
 
-        boolean complete = party.completeGroupRegistration(level, split[1]);
-        if(complete){
+        if (!party.isRegistrationComplete()) {
+            boolean complete = party.completeGroupRegistration(level, split[1]);
+            if (complete) {
+                event.getMessage().addReaction("U+2705").queue();
+            }
+        } else {
+            party.editLevelAndDescription(level, split[1]);
             event.getMessage().addReaction("U+2705").queue();
         }
+
     }
 
     public Integer getInteger(String str) {
