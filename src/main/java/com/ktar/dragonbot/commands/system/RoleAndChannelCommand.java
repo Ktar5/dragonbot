@@ -1,6 +1,7 @@
 package com.ktar.dragonbot.commands.system;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.tinylog.Logger;
 
 import java.util.List;
 
@@ -63,9 +64,9 @@ public abstract class RoleAndChannelCommand extends Command {
      * @return true if the MessageReceivedEvent (event) came from a channel included in {@link RoleAndChannelCommand#channels}
      */
     private boolean channelCheck(MessageReceivedEvent event) {
-        String channelName = event.getChannel().getName();
-        for (String allowedChannelName : channels) {
-            if (channelName.equalsIgnoreCase(allowedChannelName)) {
+        String channelId = event.getChannel().getId();
+        for (String allowedChannelIDs : channels) {
+            if (channelId.equalsIgnoreCase(allowedChannelIDs)) {
                 return true;
             }
         }

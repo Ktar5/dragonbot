@@ -7,6 +7,7 @@ import com.ktar.dragonbot.commands.system.RoleAndChannelCommand;
 import com.ktar.dragonbot.dnd.Party;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.tinylog.Logger;
 
 @RegisterCommand
 public class CompleteDMRegistrationCommand extends RoleAndChannelCommand {
@@ -23,6 +24,7 @@ public class CompleteDMRegistrationCommand extends RoleAndChannelCommand {
     @Override
     public void act(MessageReceivedEvent event, String content) {
         Guild guildById = Bot.get().getDiscord().getGuildById(Const.GUILD_ID);
+
         if (guildById == null) {
             throw new RuntimeException("Guild does not exist: " + Const.GUILD_ID);
         }
@@ -42,10 +44,12 @@ public class CompleteDMRegistrationCommand extends RoleAndChannelCommand {
             event.getMessage().reply("This is an invalid command, please re-read the syntax in your welcome message.").queue();
             return;
         }
+
         if (split[0].length() > 2) {
             event.getMessage().reply("Please choose a level less (or equal to) 20, and greater than 0. Given: " + split[0] + ".").queue();
             return;
         }
+
         Integer level = getInteger(split[0]);
         if (level == null || level < 1 || level > 20) {
             event.getMessage().reply("Please choose a level less (or equal to) 20, and greater than 0. Given: " + split[0] + ".").queue();

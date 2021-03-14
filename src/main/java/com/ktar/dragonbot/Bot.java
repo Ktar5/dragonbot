@@ -28,6 +28,8 @@ public class Bot {
     private final CommandHandler commandHandler;
     private final GroupHandler groupHandler;
 
+    //TODO Did not react to registration dm message with emoji
+    //TODO Did not parse the data from the command for registering group
     public Bot(JDA discord, ReadyListener readyListener) {
         this.discord = discord;
         this.readyListener = readyListener;

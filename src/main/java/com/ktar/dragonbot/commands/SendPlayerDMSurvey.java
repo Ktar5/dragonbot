@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.ErrorHandler;
 import net.dv8tion.jda.api.requests.ErrorResponse;
+import org.tinylog.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,7 +79,7 @@ public class SendPlayerDMSurvey extends RoleCommand {
     private static final String YES_STRING = "<:yes:682879741270687796>";
 
     private static String announcement =
-        "@everzyone ***Weekly Survey for {{DATE}}***\n" +
+        "@everyone ***Weekly Survey for {{DATE}}***\n" +
             "**If you want to play this week, you have to react.**\n" +
             "(*Even if you are continuing a session from last week*)\n\n" +
             "> Every week we put out this survey for figuring out how many DMs we need in comparison with how many " +
@@ -113,6 +114,7 @@ public class SendPlayerDMSurvey extends RoleCommand {
         //Delete old message
         textChannelById.deleteMessageById(weeklyAnnouncementMessage).queue();
         //Delete old message
+        Logger.info("Group survey id: " + SendGroupSurvey.groupSurveyMessage);
         textChannelById.deleteMessageById(SendGroupSurvey.groupSurveyMessage).queue();
 
         //Send new one and update

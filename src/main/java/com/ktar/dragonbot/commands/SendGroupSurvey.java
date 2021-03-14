@@ -78,7 +78,7 @@ public class SendGroupSurvey extends RoleCommand {
     private static final String YES_STRING = "<:yes:682879741270687796>";
 
     private static String announcement =
-        "@evezryone ***Group Picker for {{DATE}}***\n" +
+        "@everyone ***Group Picker for {{DATE}}***\n" +
             "**If you want to play this week, you have to react.**\n" +
             "(*Even if you are continuing a session from last week*)\n\n" +
             "Please react with the emoji corresponding to the group number in order to register for that group\n";
