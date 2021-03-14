@@ -33,10 +33,10 @@ public class CompleteDMRegistrationCommand extends RoleAndChannelCommand {
         }
 
         Party party = Bot.get().getGroupHandler().getGroups().get(event.getMember().getId());
-        if (party.isRegistrationComplete()) {
-            event.getMessage().reply("You already registered your group.").queue();
-            return;
-        }
+//        if (party.isRegistrationComplete()) {
+//            event.getMessage().reply("You already registered your group.").queue();
+//            return;
+//        }
 
         String[] split = content.split(" ", 2);
         if (split.length != 2) {
