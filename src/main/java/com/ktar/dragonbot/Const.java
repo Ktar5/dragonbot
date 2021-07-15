@@ -15,5 +15,5 @@ public final class Const {
     public static final String BOT_LOG_CHANNEL = "634997071233024000";
     public static final String MAYBE_DM_ROLE = "759918078019502142";
     public static final String GUILD_ID = "613161957490688000";
-    public static final String GROUPS_CATEGORY = "613163555721707530";
+    public static final String GROUPS_CATEGORY = "865046656993722408";
 }
