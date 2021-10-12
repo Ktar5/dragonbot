@@ -6,7 +6,7 @@ package com.ktar.dragonbot;
  * Discord settings and then you'll be able to "right click -> Copy ID" on most Discord entities.
  */
 public final class Const {
-    public static final String WEEKLY_DM_ROLE = "635576815435382794";
+    public static final String WEEKLY_DM_ROLE = "5555";
     public static final String DM_ROLE = "613164964219453443";
     public static final String DM_CHANNEL = "613163595345428531";
     public static final String WEEKLY_CHANNEL = "635223005815111711";
